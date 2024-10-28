@@ -9,17 +9,15 @@ using System;
 
 public class ScoreBase : MonoBehaviour
 {
-    private string urlGet = "http://localhost:3000/getdata";
-    private string urlSend = "http://localhost:3000/senddata";
+    private string urlGet = "https://flappygameserver.onrender.com/getdata";
+    private string urlSend = "https://flappygameserver.onrender.com/senddata";
 
     [SerializeField] private TextMeshProUGUI scoreboard;
-    public string playername = "Semen";
-    public int playerscore = 555;
+    [SerializeField] private InputField nameField;
+    [SerializeField] private GameObject entername;
 
-    private void Start()
-    {
-        StartCoroutine(GetInfoFromUrl());
-    }
+    [HideInInspector]public string playername;
+    public int playerscore = 555;
 
     private IEnumerator GetInfoFromUrl()
     {
@@ -84,9 +82,11 @@ public class ScoreBase : MonoBehaviour
 
     public void SendScoreToSQL()
     {
-        Debug.Log($"Send {playername} and {playerscore}");
-        if(GameOverScreen.highscore > 0)
+        playername = nameField.text;
+        
+        if(GameOverScreen.highscore > 0 && name != "")
         {
+            entername.SetActive(false);
             StartCoroutine(SendInfoToUrl(playername, GameOverScreen.highscore));
         }
     }

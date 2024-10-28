@@ -15,9 +15,13 @@ public class Patron : MonoBehaviour
             Destroy(gameObject);
             GameScore.score += 15;
         }
-        if (collider.gameObject.CompareTag("Rocket"))
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Rocket"))
         {
-            Destroy(collider.gameObject);
+            Destroy(other.gameObject);
             Destroy(gameObject);
             GameScore.score += 50;
         }
@@ -27,7 +31,7 @@ public class Patron : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void Start()
     {
         rb.velocity = new Vector3(5f, 0f, 0f);
     }

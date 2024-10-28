@@ -1,33 +1,43 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 public class Meteor : MonoBehaviour
 {
-    private float size;
-    private float direction;
     private Rigidbody rb;
+
     [SerializeField] private Transform player;
+
+    [SerializeField] private GameObject rocket;
+    private Vector3 spawnRocket;
 
     private void Awake()
     {
-        size = Random.Range(0.1f, 5f);
-        transform.localScale = new Vector3(size, size, size);
-        
-        if(transform.position.y > player.position.y)
-        {
-            direction = Random.Range(-3f, -0.1f);
-        }
-        else
-        {
-            direction = Random.Range(0.1f, 3f);
-        }
-
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void Start()
     {
-        float speed = Random.Range(1f, 3f);
-        rb.velocity = new Vector3(-3f * speed, direction, 0f);
+        rb.velocity = new Vector3(-10f, 0f, 0f);
+        InvokeRepeating("Rockets", 0f, 1f);
+        Destroy(gameObject, 3f);
+    }
+
+    private void Rockets()
+    {
+        if(transform.position.x > player.position.x)
+        {
+            GameObject rocketClone = Instantiate(rocket, transform.position, Quaternion.identity);
+
+            rocketClone.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            Vector3 direction = (player.position - rocketClone.transform.position).normalized;
+
+            rocketClone.GetComponent<Rigidbody>().velocity = direction * 3f;
+
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            rocketClone.transform.rotation = rotation * Quaternion.Euler(90f, 0f, 0f);
+
+            Destroy(rocketClone, 5f);
+        }
     }
 }

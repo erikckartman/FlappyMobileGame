@@ -13,13 +13,27 @@ public class GameInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collider)
     {
-        if (collider.gameObject.CompareTag("Metheor") || collider.gameObject.CompareTag("Rocket"))
+        if (collider.gameObject.CompareTag("Metheor"))
         {
+            Destroy(collider.gameObject);
             Destroy(gameObject);
         }
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Rocket")) {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    private void MovePlayer()
     {
         float horizontal = joystick.Horizontal();
         float vertical = joystick.Vertical();

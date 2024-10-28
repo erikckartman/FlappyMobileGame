@@ -25,17 +25,9 @@ public class Spawn : MonoBehaviour
 
     private void Spawning()
     {
-        meteorY = Random.Range(-7f, 7f);
-        if(meteorY < 5f && meteorY > -5f)
-        {
-            meteorX = Random.Range(10f, 13f);
-        }
-        else
-        {
-            meteorX = Random.Range(2f, 13f);
-        }
-
-        spawnMeteor = new Vector3(meteorX, meteorY, 0f);
+        meteorY = Random.Range(-4f, 4f);
+        
+        spawnMeteor = new Vector3(12f, meteorY, 0f);
 
         GameObject meteorClone = Instantiate(meteor, spawnMeteor, Quaternion.identity);
     }
@@ -54,5 +46,24 @@ public class Spawn : MonoBehaviour
 
         Quaternion rotation = Quaternion.LookRotation(direction);
         rocketClone.transform.rotation = rotation * Quaternion.Euler(90f, 0f, 0f);
+
+        Destroy(rocketClone, 5f);
+    }
+
+    private IEnumerator SpawnPlanes()
+    {
+        while (true)
+        {
+            Spawning();
+            yield return new WaitForSeconds(3f);
+        }
+    }
+    private IEnumerator SpawnRockets()
+    {
+        while (true)
+        {
+            Rockets();
+            yield return new WaitForSeconds(2f);
+        }
     }
 }

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8266488347363370362, guid: b2fcd36159cbc7847ae80587064eb0ee, type: 3}
+  rocket: {fileID: 7472541231913458175, guid: 8d38c57cf2d12dd47af3dd984b7ce310, type: 3}
 --- !u!135 &831583940945119591
 SphereCollider:
   m_ObjectHideFlags: 0
