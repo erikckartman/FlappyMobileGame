@@ -10,6 +10,12 @@ public class GameInput : MonoBehaviour
     [SerializeField] private Transform shoot;
     [SerializeField] private GameObject bullet;
     private bool canShoot = true;
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void OnCollisionEnter(Collision collider)
     {
@@ -37,9 +43,19 @@ public class GameInput : MonoBehaviour
     {
         float horizontal = joystick.Horizontal();
         float vertical = joystick.Vertical();
+        float airFactor = 0f;
 
-        Vector3 direction = new Vector3(horizontal, vertical, 0f);
-        transform.position += direction * speed * Time.deltaTime;
+        if(horizontal == 0)
+        {
+            airFactor = 0;
+        }
+        else
+        {
+            airFactor = -0.5f;
+        }
+
+        rb.velocity= new Vector3(horizontal * speed + airFactor, vertical * speed, 0f);
+        
     }
 
     public void Shoot()
