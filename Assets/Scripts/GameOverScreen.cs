@@ -38,4 +38,9 @@ public class GameOverScreen : MonoBehaviour
     {
         SceneManager.LoadScene("Leaderboard");
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

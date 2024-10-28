@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using TMPro;
 using System.Text.RegularExpressions;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ScoreBase : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ScoreBase : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreboard;
     [SerializeField] private InputField nameField;
     [SerializeField] private GameObject entername;
+    [SerializeField] private GameObject errorboard;
 
     [HideInInspector]public string playername;
     public int playerscore = 555;
@@ -28,6 +30,7 @@ public class ScoreBase : MonoBehaviour
         if(request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log("Error");
+            errorboard.SetActive(true);
         }
         else
         {
@@ -51,6 +54,7 @@ public class ScoreBase : MonoBehaviour
                 {
                     Debug.LogWarning("Invalid data format for highscore entry: " + highscore);
                     Debug.LogWarning("Fields length: " + fields.Length + ", Content: " + string.Join(", ", fields));
+                    errorboard.SetActive(true);
                 }
             }
 
@@ -71,6 +75,7 @@ public class ScoreBase : MonoBehaviour
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.Log("Error: " + request.error);
+                errorboard.SetActive(true);
             }
             else
             {
@@ -89,5 +94,19 @@ public class ScoreBase : MonoBehaviour
             entername.SetActive(false);
             StartCoroutine(SendInfoToUrl(playername, GameOverScreen.highscore));
         }
+        else
+        {
+            errorboard.SetActive(true);
+        }
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void Refresh()
+    {
+        StartCoroutine(GetInfoFromUrl());
     }
 }
