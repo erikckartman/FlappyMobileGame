@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +10,7 @@ public class GameInput : MonoBehaviour
     [SerializeField] private Controls joystick;
     private float speed = 2f;
     [SerializeField] private Transform shoot;
-    [SerializeField] private GameObject bullet;
+    public GameObject patron;
     private bool canShoot = true;
     private Rigidbody rb;
 
@@ -63,7 +65,7 @@ public class GameInput : MonoBehaviour
         if (canShoot)
         {
             canShoot = false;
-            Instantiate(bullet, shoot.transform.position, Quaternion.Euler(0f, 0f, 90f));
+            Instantiate(patron, shoot.transform.position, Quaternion.Euler(0f, 90f, 0f));
             StartCoroutine(WaitForShoot());
         }
     }

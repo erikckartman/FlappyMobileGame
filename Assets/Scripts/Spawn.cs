@@ -29,7 +29,7 @@ public class Spawn : MonoBehaviour
         
         spawnMeteor = new Vector3(12f, meteorY, 0f);
 
-        GameObject meteorClone = Instantiate(meteor, spawnMeteor, Quaternion.identity);
+        GameObject meteorClone = Instantiate(meteor, spawnMeteor, Quaternion.Euler(-120f, 0f, 90f));
     }
 
     private void Rockets()
@@ -43,9 +43,9 @@ public class Spawn : MonoBehaviour
         Vector3 direction = (player.position - rocketClone.transform.position).normalized;
 
         rocketClone.GetComponent<Rigidbody>().velocity = direction * 15f;
-
+        float rockz = Random.Range(1f, 360f);
         Quaternion rotation = Quaternion.LookRotation(direction);
-        rocketClone.transform.rotation = rotation * Quaternion.Euler(90f, 0f, 0f);
+        rocketClone.transform.rotation = rotation * Quaternion.Euler(180f, 180f, rockz);
 
         Destroy(rocketClone, 5f);
     }

@@ -29,13 +29,13 @@ public class Meteor : MonoBehaviour
         {
             GameObject rocketClone = Instantiate(rocket, transform.position, Quaternion.identity);
 
-            rocketClone.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            rocketClone.transform.localScale = new Vector3(10f, 10f, 10f);
             Vector3 direction = (player.position - rocketClone.transform.position).normalized;
 
             rocketClone.GetComponent<Rigidbody>().velocity = direction * 3f;
 
             Quaternion rotation = Quaternion.LookRotation(direction);
-            rocketClone.transform.rotation = rotation * Quaternion.Euler(90f, 0f, 0f);
+            rocketClone.transform.rotation = rotation * Quaternion.Euler(180f, 180f, 0f);
 
             Destroy(rocketClone, 5f);
         }
