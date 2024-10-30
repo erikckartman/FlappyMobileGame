@@ -17,10 +17,18 @@ public class Spawn : MonoBehaviour
 
     [SerializeField] private Transform player;
 
+    public Renderer spriteRenderer;
+
     private void Start()
     {
         InvokeRepeating("Spawning", 0f, 3f);
         InvokeRepeating("Rockets", 0f, 2f);
+    }
+
+    private void Update()
+    {
+        float offset = Time.time * 0.1f;
+        spriteRenderer.material.mainTextureOffset = new Vector2(offset, 0);
     }
 
     private void Spawning()
