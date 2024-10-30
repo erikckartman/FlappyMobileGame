@@ -1023,8 +1023,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 0
+  field of view: 53
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1203,6 +1203,10 @@ PrefabInstance:
       propertyPath: shoot
       value: 
       objectReference: {fileID: 818885797}
+    - target: {fileID: 4552941926302012492, guid: b2fcd36159cbc7847ae80587064eb0ee, type: 3}
+      propertyPath: blowup
+      value: 
+      objectReference: {fileID: 1082396828962507463, guid: 5212a4181edf9f74b824a49aa397158e, type: 3}
     - target: {fileID: 4552941926302012492, guid: b2fcd36159cbc7847ae80587064eb0ee, type: 3}
       propertyPath: bullet
       value: 

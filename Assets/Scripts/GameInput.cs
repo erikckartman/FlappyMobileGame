@@ -10,9 +10,10 @@ public class GameInput : MonoBehaviour
     [SerializeField] private Controls joystick;
     private float speed = 2f;
     [SerializeField] private Transform shoot;
-    public GameObject patron;
+    [SerializeField] private GameObject patron;
     private bool canShoot = true;
     private Rigidbody rb;
+    [SerializeField] private GameObject blowup;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class GameInput : MonoBehaviour
         if (collider.gameObject.CompareTag("Metheor"))
         {
             Destroy(collider.gameObject);
+            Instantiate(blowup, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -32,6 +34,7 @@ public class GameInput : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Rocket")) {
             Destroy(other.gameObject);
+            Instantiate(blowup, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

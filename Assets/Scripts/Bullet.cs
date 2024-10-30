@@ -6,12 +6,14 @@ using UnityEngine;
 public class Patron : MonoBehaviour
 {
     private Rigidbody rb;
+    [SerializeField] private GameObject blowup;
 
     private void OnCollisionEnter(Collision collider)
     {
         if (collider.gameObject.CompareTag("Metheor"))
         {
             Destroy(collider.gameObject);
+            Instantiate(blowup, collider.gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
             GameScore.score += 15;
         }
@@ -22,6 +24,7 @@ public class Patron : MonoBehaviour
         if (other.gameObject.CompareTag("Rocket"))
         {
             Destroy(other.gameObject);
+            Instantiate(blowup, transform.position, Quaternion.identity);
             Destroy(gameObject);
             GameScore.score += 50;
         }

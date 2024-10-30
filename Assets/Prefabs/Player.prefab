@@ -179,5 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
-  shoot: {fileID: 0}
-  patron: {fileID: 0}
+  shoot: {fileID: 6150323614707462030}
+  patron: {fileID: 7131403092767092664, guid: 56bfc416a6cfa5743878ab8f07b8746e, type: 3}
+  blowup: {fileID: 1082396828962507463, guid: 5212a4181edf9f74b824a49aa397158e, type: 3}
