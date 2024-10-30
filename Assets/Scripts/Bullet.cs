@@ -8,26 +8,24 @@ public class Patron : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private GameObject blowup;
 
-    private void OnCollisionEnter(Collision collider)
-    {
-        if (collider.gameObject.CompareTag("Metheor"))
-        {
-            Destroy(collider.gameObject);
-            Instantiate(blowup, collider.gameObject.transform.position, Quaternion.identity);
-            Destroy(gameObject);
-            GameScore.score += 15;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Rocket"))
         {
+            GameScore.score += 50;
             Destroy(other.gameObject);
             Instantiate(blowup, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            GameScore.score += 50;
         }
+
+        if (other.gameObject.CompareTag("Metheor"))
+        {
+            GameScore.score += 15;
+            Destroy(other.gameObject);
+            Instantiate(blowup, other.gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
     }
     private void Awake()
     {
@@ -37,5 +35,6 @@ public class Patron : MonoBehaviour
     private void Start()
     {
         rb.velocity = new Vector3(5f, 0f, 0f);
+        Destroy(gameObject, 5f);
     }
 }
