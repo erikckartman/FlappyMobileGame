@@ -22,7 +22,7 @@ public class Spawn : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("Spawning", 0f, 3f);
-        InvokeRepeating("Rockets", 0f, 2f);
+        InvokeRepeating("Rockets", 0f, 3f);
     }
 
     private void Update()
@@ -42,10 +42,10 @@ public class Spawn : MonoBehaviour
 
     private void Rockets()
     {
-        rocketX = Random.Range(-9f, 9f);
-        rocketY = Random.Range(-5f, 5f);
+        rocketX = Random.Range(-10f, 10f);
+        rocketY = Random.Range(-10f, 10f);
 
-        spawnRocket = new Vector3(rocketX, rocketY, player.position.z + 50f);
+        spawnRocket = new Vector3(player.position.x + rocketX, player.position.x + rocketY, player.position.z + 50f);
         GameObject rocketClone = Instantiate(rocket, spawnRocket, Quaternion.identity);
 
         Vector3 direction = (player.position - rocketClone.transform.position).normalized;

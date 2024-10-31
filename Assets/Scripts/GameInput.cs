@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameInput : MonoBehaviour
 {
     [SerializeField] private Controls joystick;
-    private float speed = 2f;
+    private float speed = 6f;
     [SerializeField] private Transform shoot;
     [SerializeField] private GameObject patron;
     private bool canShoot = true;
