@@ -61,6 +61,12 @@ public class GameInput : MonoBehaviour
 
         rb.velocity= new Vector3(horizontal * speed + airFactor, vertical * speed, 0f);
         
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -8f, 8f);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -4.5f, 4.5f);
+        clampedPosition.z = 0f;
+
+        transform.position = clampedPosition;
     }
 
     public void Shoot()
